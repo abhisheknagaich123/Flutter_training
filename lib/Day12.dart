@@ -7,13 +7,37 @@ class Day12 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(appBar: AppBar(),
-    body: SafeArea(
-      child: Container
-      ( height: 300,width: 400,color: Colors.amberAccent, margin:EdgeInsets.all(40),padding: EdgeInsets.all(20),
-        child: Center(child: Text('This is abhishek', style:TextStyle(backgroundColor: Colors.black26),))),
-    ),),
-    );
+    return MaterialApp(home: Scaffold
+    (body: SafeArea
+    (child: Column
+    (children: 
+    [
+      Row(
+    children: const [
+      Icon(Icons.tap_and_play,size: 50,color:Colors.blue),
+    Text('Go to connection settings')],
+     ),
+     Row(
+    children: const [
+      Icon(Icons.volume_up,size: 50,color:Colors.blue),
+    Text('sounds and vibration')],
+     ),
+     Row(
+    children: const [
+      Icon(Icons.display_settings,size: 50,color:Colors.blue),
+    Text('Go to display settings')],
+     ),
+     Row(
+    children: const [
+      Icon(Icons.apps ,size: 50,color:Colors.blue),
+    Text('Go to Apps settings')],
+     )
+     ,Row(
+    children: const [
+      Icon(Icons.fingerprint,size: 50,color:Colors.blue),
+    Text('Go to fingerprint settings')],
+     )
+     ],)),),);
     
   }
 }
