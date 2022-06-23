@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -8,9 +10,10 @@ class Day11 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(appBar: AppBar(title: Text("hello world"),
+      home: Scaffold(appBar: AppBar(title: const Text("hello world"),
+      backgroundColor: Color.fromARGB(221, 214, 134, 134),centerTitle: true,
       ),
-      body: const Text('Ram Ram sa'),)
+      body: Center(child: SafeArea (child: const Text('Ram Ram sa'))),)
       
        );
   }
