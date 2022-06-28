@@ -16,6 +16,7 @@ class _SI_CalculatorState extends State<SI_Calculator> {
    TextEditingController _rate=TextEditingController();
     TextEditingController _year=TextEditingController();
     String displayResult = "";
+    bool _ischeck=false;
 
 
   @override
@@ -97,17 +98,30 @@ class _SI_CalculatorState extends State<SI_Calculator> {
               SizedBox(
                 height: 40,
               ),
-             Row(
+              Row(
+                children: [
+                  Checkbox(value: _ischeck, onChanged: (b){
+                    setState(() {
+                      _ischeck=b!;
+                    });
+                    
+                  }),
+                  Text('Are you agree with teams ')
+                ],
+              )
+            , Row(
               
               children: [
-
+                         
                 
                  Expanded(
-                   child: ElevatedButton(onPressed: (){
+                   child: ElevatedButton(onPressed: _ischeck?(){
                              setState(() {
                                displayResult=_cal();
                              });
-                               }, child: Text('Calculate')),
+                               }:null,
+                               
+                                child: Text('Calculate')),
                  )
               
              
