@@ -56,7 +56,7 @@ class whatssapp extends StatelessWidget {
 
         bottom: const TabBar( tabs: [
           Tab(
-                  icon: Icon(Icons.camera),
+                  icon: Icon(Icons.photo_camera),
                 ),
           Tab(
                   text: "Chat",
@@ -70,9 +70,23 @@ class whatssapp extends StatelessWidget {
 
         ]),
         ),
-        body: TabBarView(children: [
-          
-        ]),
+        body: Column(
+          children: [
+            Expanded(
+              child: Container(
+                child: TabBarView(children: [
+                  Center(child: Text("this is camera"),),
+                   Center(child: Text("this is chat"),),
+                    Center(child: Text("this is status"),),
+                     Center(child: Text("this is Calls"),)
+                  
+                ]),
+              ),
+            ),
+          ],
+        ),
+
+        
          floatingActionButton: FloatingActionButton( backgroundColor: Color.fromARGB(255, 4, 69, 37),
           onPressed: () {
             print("FLoating Action Button Clicked");
