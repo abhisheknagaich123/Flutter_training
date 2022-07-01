@@ -23,7 +23,8 @@ class _GroupButtonState extends State<GroupButton> {
             'onion',
             'black olive',
             'musrooms',
-            'corn'
+            'corn',
+            'soya'
           ]
           )
         ],

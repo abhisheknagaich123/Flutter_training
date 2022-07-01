@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "217411157097",
+    "project_id": "curdapp-7fbbb",
+    "storage_bucket": "curdapp-7fbbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217411157097:android:6a47993a1def1d9ed476f8",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217411157097-dmdjmqvk6spfbqm9nkkfp8h2ujtsce1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKGLsVUKTg9YtxYUCP148JkLue9xHPx1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217411157097-dmdjmqvk6spfbqm9nkkfp8h2ujtsce1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
