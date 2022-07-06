@@ -25,7 +25,7 @@ class get_start extends StatelessWidget {
                 height: 20,
               ),
              ElevatedButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: 
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: 
            (context){
             return (User_Login());
            }

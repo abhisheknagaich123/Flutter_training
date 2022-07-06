@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/Bottomnavbar.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_application_1/GroupButton.dart';
 import 'package:flutter_application_1/Insta_clone/Login.dart';
 import 'package:flutter_application_1/Insta_clone/SignupScreen.dart';
 import 'package:flutter_application_1/SI_Calculator.dart';
+import 'package:flutter_application_1/Signup2.dart';
 import 'package:flutter_application_1/User_Login.dart';
 import 'package:flutter_application_1/day13.dart';
 import 'package:flutter_application_1/screens/Trainig.dart';
@@ -22,21 +24,37 @@ import 'package:flutter_application_1/webview.dart';
 import 'package:flutter_application_1/whatssapp.dart';
 import 'package:flutter_application_1/get_start.dart';
 
-
 import 'App.dart';
 import 'Insta_clone/colors.dart';
 import 'Test.dart';
-void main()async {
-  WidgetsFlutterBinding();
- await Firebase.initializeApp();
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-        title: 'Instagram Clone',
-     theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: mobileBackgroundColor),
-    home:SignupScreen()
-  ));
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
 }
-//User_Login.dart
-//get_start.dart
-//main.dart
+
+class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          // Check for Errors
+          if (snapshot.hasError) {
+            print("Something Went Wrong");
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return MaterialApp(
+            title: 'Flutter Firebase EMail Password Auth',
+            theme: ThemeData(
+              primarySwatch: Colors.deepPurple,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: Signup2(),
+          );
+        });
+  }
+}

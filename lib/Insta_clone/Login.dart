@@ -1,118 +1,199 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_application_1/Insta_clone/TextFieldInput.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_application_1/Insta_clone/TextFieldInput.dart';
-
-import 'colors.dart';
+import 'package:flutter_application_1/Signup2.dart';
+import 'package:flutter_application_1/get_start.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  Login({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  @override
-  void dispose() {
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
+  final _formKey = GlobalKey<FormState>();
+
+  var email = "";
+  var password = "";
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  userLogin() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => get_start(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print("No User Found for that Email");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "No User Found for that Email",
+              style: TextStyle(fontSize: 18.0, color: Colors.black),
+            ),
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        print("Wrong Password Provided by User");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "Wrong Password Provided by User",
+              style: TextStyle(fontSize: 18.0, color: Colors.black),
+            ),
+          ),
+        );
+      }
+    }
   }
 
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Container(),
-              flex: 1,
-            ),
-            SvgPicture.asset(
-              'images/insta.svg',
-              color: primaryColor,
-              height: 64,
-            ),
-            SizedBox(
-              height: 64,
-            ),
-            TextFieldInput(
-              hintText: 'Enter your email',
-              textInputType: TextInputType.emailAddress,
-              textEditingController: _emailController,
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            TextFieldInput(
-              hintText: 'Enter your password',
-              textInputType: TextInputType.text,
-              textEditingController: _passwordController,
-              isPass: true,
-            ),
-             SizedBox(
-              height: 24,
-            ),
-            InkWell(
-              child: Container(
-                
-                child: Text(
-                  'Log in',
-                ),
-                width: double.infinity,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
+      appBar: AppBar(
+        title: Text("User Login"),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          child: ListView(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Email: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  color: blueColor,
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Email';
+                    } else if (!value.contains('@')) {
+                      return 'Please Enter Valid Email';
+                    }
+                    return null;
+                  },
                 ),
               ),
-            ),
-             const SizedBox(
-                height: 12,
-              ),
-              Flexible(
-                child: Container(),
-                flex: 2,
-              ),
-                Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: const Text(
-                      'Dont have an account?',
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  GestureDetector(
-                    
-                    
-                    child: Container(
-                      child: const Text(
-                        ' Signup.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                  controller: passwordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Password';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 60.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            email = emailController.text;
+                            password = passwordController.text;
+                          });
+                          userLogin();
+                        }
+                      },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontSize: 18.0),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
-                  ),
-                ],
+                    TextButton(
+                       onPressed: () => {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => ForgotPassword(),
+                      //     ),
+                      //   )
+                       },
+                      child: Text(
+                        'Forgot Password ?',
+                        style: TextStyle(fontSize: 14.0),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-          ],
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an Account? "),
+                    TextButton(
+                      onPressed: () => {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, a, b) => Signup2(),
+                              transitionDuration: Duration(seconds: 0),
+                            ),
+                            (route) => false)
+                      },
+                      child: Text('Signup'),
+                    ),
+                    // TextButton(
+                    //   onPressed: () => {
+                    //     Navigator.pushAndRemoveUntil(
+                    //         context,
+                    //         PageRouteBuilder(
+                    //           pageBuilder: (context, a, b) => UserMain(),
+                    //           transitionDuration: Duration(seconds: 0),
+                    //         ),
+                    //         (route) => false)
+                    //   },
+                    //   child: Text('Dashboard'),
+                    // ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
