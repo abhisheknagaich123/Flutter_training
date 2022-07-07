@@ -9,12 +9,13 @@ import 'package:flutter_application_1/Day12.dart';
 import 'package:flutter_application_1/Day14.dart';
 import 'package:flutter_application_1/Dropdownmenu.dart';
 import 'package:flutter_application_1/GroupButton.dart';
-import 'package:flutter_application_1/Insta_clone/Login.dart';
 import 'package:flutter_application_1/Insta_clone/SignupScreen.dart';
 import 'package:flutter_application_1/SI_Calculator.dart';
 import 'package:flutter_application_1/Signup2.dart';
+import 'package:flutter_application_1/Signup_or_Login/Login.dart';
 import 'package:flutter_application_1/User_Login.dart';
 import 'package:flutter_application_1/day13.dart';
+import 'package:flutter_application_1/pages.dart';
 import 'package:flutter_application_1/screens/Trainig.dart';
 import 'package:flutter_application_1/screens/mainscreen.dart';
 import 'package:flutter_application_1/screens/screen0.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_application_1/screens/screen2.dart';
 import 'package:flutter_application_1/webview.dart';
 import 'package:flutter_application_1/whatssapp.dart';
 import 'package:flutter_application_1/get_start.dart';
+import 'package:flutter_application_1/Signup_or_Login/Home.dart';
 
 import 'App.dart';
 import 'Insta_clone/colors.dart';
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.deepPurple,
             ),
             debugShowCheckedModeBanner: false,
-            home: Signup2(),
+            home: Login(),
           );
         });
   }

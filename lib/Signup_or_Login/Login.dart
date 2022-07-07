@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Signup2.dart';
-import 'package:flutter_application_1/get_start.dart';
+import 'package:flutter_application_1/Signup_or_Login/Signup.dart';
+import 'package:flutter_application_1/Signup_or_Login/Welcome.dart';
+import 'package:flutter_application_1/pages.dart';
+import 'package:flutter_application_1/Signup_or_Login/Home.dart';
+
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -27,7 +30,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => get_start(),
+          builder: (context) =>Welcome(),
         ),
       );
     } on FirebaseAuthException catch (e) {
@@ -168,7 +171,7 @@ class _LoginState extends State<Login> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (context, a, b) => Signup2(),
+                              pageBuilder: (context, a, b) => Signup(),
                               transitionDuration: Duration(seconds: 0),
                             ),
                             (route) => false)

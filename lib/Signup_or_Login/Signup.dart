@@ -4,15 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Signup_or_Login/Login.dart';
 
-
-class Signup2 extends StatefulWidget {
-  Signup2({Key? key}) : super(key: key);
+class Signup extends StatefulWidget {
+  Signup({Key? key}) : super(key: key);
 
   @override
-  _Signup2State createState() => _Signup2State();
+  _SignupState createState() => _SignupState();
 }
 
-class _Signup2State extends State<Signup2> {
+class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
 
   var email = "";
